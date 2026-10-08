@@ -10,13 +10,13 @@ export async function getStaticPaths() {
   const books = await getCollection("books");
 
   return books.map( (book) => ({
-    params: { id:book.slug },
+    params: { id:book.id },
     props: { book }
   }))
 }
 
 const { book } = Astro.props
-const { data, slug } = book
+const { data, id } = book
 const { title, author, img, readtime, description, buy } = data
 
 const { Content } = await render(book)
@@ -30,7 +30,7 @@ export const prerender = true
     <aside class="flex flex-col items-center gap-4">
       <a href="/" class="hover:underline opacity-70">Volver atrás</a>
       <img
-        transition:name={`img-${slug}`} 
+        transition:name={`img-${id}`} 
         class="rounded w-60 h-auto" 
         src={`/${img}`} 
         alt={title}>
@@ -38,9 +38,19 @@ export const prerender = true
     y tenemos que cambiar la configuración en Astro.config.mjs-->
 <!--Lo único que queremos que no sea estático es este componente, esta parte de nuestra página,
     así usamos islas de servidor -->
-      <BookScore server:defer id={slug}/>
+<!--El slot "fallback" se muestra mientras llega la isla de servidor. Le damos el mismo
+    tamaño que el contenido final para que la página no "salte" al cargar los datos -->
+      <BookScore server:defer id={id}>
+        <span slot="fallback" class="text-xs h-4 opacity-50 animate-pulse">
+          ⭐ Puntuación: -/5
+        </span>
+      </BookScore>
        {
-        SHOW_BUY_BUTTON && <BuyButton server:defer buy={buy} />
+        SHOW_BUY_BUTTON && (
+          <BuyButton server:defer buy={buy}>
+            <div slot="fallback" class="h-8 w-64 rounded-2xl bg-gray-100/20 animate-pulse"></div>
+          </BuyButton>
+        )
        }
     </aside>
 

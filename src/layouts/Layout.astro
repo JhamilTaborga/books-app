@@ -30,7 +30,11 @@ import '../styles/global.css';
 
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
+		background-color: #13151a;
+		/* Degradado desde el centro (color original) hacia los bordes (tono más claro).
+		   Con "fixed" el degradado se mantiene centrado en la pantalla al hacer scroll */
+		background-image: radial-gradient(circle at center, #13151a 0%, #464d5e 100%);
+		background-attachment: fixed;
 		color: #fff;
 		
 		/* margin: 0;
@@ -39,7 +43,7 @@ import '../styles/global.css';
 	}
 
 	body {
-		@apply grid place-content-center p-20;
+		@apply grid place-content-center p-6 md:p-20;
 	}
 
 	body > div {
