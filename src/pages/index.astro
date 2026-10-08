@@ -10,16 +10,16 @@ export const prerender = true
 
 <Layout title="Philosophy books">
 	<main>
-		<h1 class="text-center text-5xl md:text-7xl font-extrabold">Philosophy
+		<h1 class="text-center text-5xl max-xs:text-4xl md:text-7xl font-extrabold">Philosophy
 			<span class="block">Books</span>
 		</h1>
-		<p class="text-center text-lg text-gray-400 mt-6 mb-16 md:mb-24 max-w-xl mx-auto">
+		<p class="text-center text-lg max-xs:text-base text-gray-400 mt-6 mb-16 md:mb-24 max-w-xl mx-auto">
 			Una selección de libros para empezar a pensar con filosofía.
 		</p>
 
 		<section aria-label="Libros recomendados para aprender de filosofía">
-			<div class="px-4 mx-auto max-w-screen-xl">
-				<div class="grid gap-x-12 gap-y-16 md:grid-cols-2">
+			<div class="md:px-4 mx-auto max-w-screen-xl">
+				<div class="grid gap-x-12 gap-y-10 md:gap-y-16 lg:grid-cols-2">
 					{
 						books.map(book => {
 							const { id, data } = book
@@ -27,19 +27,19 @@ export const prerender = true
 
 							return(
 								<article>
-									<a href={`/libro/${id}`} class="group flex gap-8">
+									<a href={`/libro/${id}`} class="group flex gap-4 max-xs:gap-3 md:gap-8">
 										<img
 											transition:name={`img-${id}`}
-											class="w-32 md:w-48 shrink-0 self-start rounded transition group-hover:scale-110"
+											class="w-24 max-xs:w-20 sm:w-32 md:w-40 lg:w-48 shrink-0 self-start rounded transition group-hover:scale-110"
 											src={`/${img}`}
 											alt={title}/>
-										<div class="flex flex-col justify-center">
-											<h2 class="mb-1 text-2xl font-bold leading-tight text-white group-hover:underline">
+										<div class="flex flex-col justify-center min-w-0">
+											<h2 class="mb-1 text-xl max-xs:text-lg md:text-2xl font-bold leading-tight text-white group-hover:underline">
 												{title}
 											</h2>
 											<span class="mb-3 text-sm text-gray-400">{author}</span>
 
-											<p class="mb-6 text-gray-300 max-w-sm leading-relaxed">{description}</p>
+											<p class="mb-4 md:mb-6 text-sm md:text-base text-gray-300 max-w-sm md:max-w-xl lg:max-w-sm leading-relaxed max-xs:line-clamp-5">{description}</p>
 											<span class="text-xs">Lectura en {readtime} minutos</span>
 										</div>
 									</a>

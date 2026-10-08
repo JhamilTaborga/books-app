@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+/* Breakpoint extra para pantallas muy pequeñas (ej. 320px).
+   Con "max-xs:" aplicamos estilos solo por debajo de 375px, sin tocar móviles más grandes */
+@theme {
+  --breakpoint-xs: 23.4375rem;
+}

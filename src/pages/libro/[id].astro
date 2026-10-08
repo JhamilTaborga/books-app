@@ -26,12 +26,12 @@ export const prerender = true
 ---
 
 <Layout title={`${title} - Books`}>
-  <div class="flex gap-10">
-    <aside class="flex flex-col items-center gap-4">
-      <a href="/" class="hover:underline opacity-70">Volver atrás</a>
+  <div class="flex flex-col md:flex-row gap-8 md:gap-10">
+    <aside class="flex flex-col items-center gap-4 shrink-0">
+      <a href="/" class="self-start md:self-center hover:underline opacity-70">Volver atrás</a>
       <img
-        transition:name={`img-${id}`} 
-        class="rounded w-60 h-auto" 
+        transition:name={`img-${id}`}
+        class="rounded w-48 md:w-60 h-auto"
         src={`/${img}`} 
         alt={title}>
 <!--Si queremos que esta parte "BookScore" sea dinámica tenemos que agregar server:defer
@@ -54,8 +54,8 @@ export const prerender = true
        }
     </aside>
 
-    <main class="max-w-3xl">
-      <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    <main class="max-w-3xl min-w-0">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
       <div class="prose prose-invert">
         <Content />
       </div>
