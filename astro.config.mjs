@@ -13,7 +13,19 @@ export default defineConfig({
   output: 'server',
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    // Workaround para un bug de @astrojs/vercel 11.0.13: su entrypoint importa constantes de
+    // "../index.js" y eso deja en el bundle del servidor un `import "rolldown"` que solo se usa
+    // en el build. En Vercel la función falla porque no encuentra el binario nativo de rolldown.
+    // Le decimos al bundler que esos paquetes no tienen efectos secundarios para que los elimine.
+    build: {
+      rolldownOptions: {
+        treeshake: {
+          moduleSideEffects: (id, external) =>
+            external && ['rolldown', '@vercel/routing-utils'].includes(id) ? false : undefined
+        }
+      }
+    }
   },
 
   env: {
